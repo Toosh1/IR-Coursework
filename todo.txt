@@ -1,0 +1,8 @@
+cosine stuff
+return text for queries
+    -highlight words that were in queries
+vectore stuff
+increase search
+query expansion
+    -thesarus based
+    -spell check
