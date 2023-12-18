@@ -7,6 +7,7 @@ import os
 import json
 import regex as re
 from time import time as t
+from math import log
 stops = set(stopwords.words('english'))
 t0 = t()
 weights = {
@@ -69,7 +70,7 @@ lemmatizer = WordNetLemmatizer()
 vocab = {}
 docIDs = {}
 postings = {}
-# postings include [docid,frequency,weightedFrequency]
+# postings include [docid,frequency,weightedFrequency,tf-idf value]
 
 folder_name = "videogames\\"
 file_names = [f for f in os.listdir("videogames") if os.path.isfile(os.path.join("videogames", f))]
@@ -100,7 +101,7 @@ for docTokens in tokens:
             docIDsPosted = [i for i, f, wf in postings.get(postingsKey, [])]
             if docIDcounter not in docIDsPosted:
                 postingsValue = postings.get(postingsKey, [])
-                postingsValue.append((docIDcounter, frequency,weightedFrequency))
+                postingsValue.append([docIDcounter, frequency,weightedFrequency])
                 postings[postingsKey] = postingsValue
                 numberOfTerms[docIDcounter] += 1
         else:
@@ -108,10 +109,21 @@ for docTokens in tokens:
             numberOfTerms[docIDcounter] += 1
             vocab[counter] = token
             # add new index to postings
-            postings[counter] = [(docIDcounter, frequency,weightedFrequency)]
+            postings[counter] = [[docIDcounter, frequency,weightedFrequency]]
             counter += 1
     print("Inverse Indexing " + str(docIDcounter))
     docIDcounter += 1
+
+
+for index,terms in enumerate(postings.values()):
+    print("Adding tf-idf matrix " + str(index))
+    N = len(numberOfTerms)
+    dft = len(terms)
+    for doc in terms:
+        tfdt = doc[2] / numberOfTerms[doc[0]]
+        doc.append(tfdt * (1 + log(N / dft)))
+
+
 
 
 
