@@ -1,5 +1,8 @@
 import numpy as np
-arr1 = np.array([1,2,0])
-arr2 = np.array([1,2,3])
-arr3 = np.multiply(arr1,arr2)
-print(arr3)
+import matplotlib.pyplot as plt
+data = np.load("vector_matrix.npy")
+plt.figure(figsize=(8, 6)) 
+plt.imshow(data, cmap='viridis', interpolation='nearest', aspect='auto')
+plt.colorbar()  # Add a colorbar for reference
+plt.title('Matrix Visualization')
+plt.show()

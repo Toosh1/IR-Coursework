@@ -8,6 +8,7 @@ import json
 import regex as re
 from time import time as t
 from math import log
+import numpy as np
 stops = set(stopwords.words('english'))
 t0 = t()
 weights = {
@@ -115,15 +116,19 @@ for docTokens in tokens:
     docIDcounter += 1
 
 
+vector_matrix = np.zeros((len(postings),int(len(numberOfTerms))))
+
 for index,terms in enumerate(postings.values()):
     print("Adding tf-idf matrix " + str(index))
     N = len(numberOfTerms)
     dft = len(terms)
     for doc in terms:
         tfdt = doc[2] / numberOfTerms[doc[0]]
-        doc.append(tfdt * (1 + log(N / dft)))
+        idf_value = tfdt * (1 + log(N / dft))
+        vector_matrix[index,doc[0]] = idf_value
 
 
+np.save("vector_matrix",vector_matrix)
 
 
 
