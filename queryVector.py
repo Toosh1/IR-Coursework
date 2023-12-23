@@ -11,7 +11,8 @@ from time import time
 from spellchecker import SpellChecker
 import spacy
 from spacy import displacy
-
+from colorama import Fore, Back, Style
+from bs4 import BeautifulSoup
 
 #Initialising
 nlp = spacy.load("en_core_web_sm")
@@ -34,6 +35,22 @@ def sim(doc1, doc2):
     similarity = numerator / denominator
     return similarity
 
+def returnText(doc,tokens):
+    folder_name = "videogames\\"
+    with open(folder_name + doc, 'r') as file_handle:
+        text = file_handle.read()
+        soup = BeautifulSoup(text, 'html.parser')
+        paragraphs = soup.find(id = 'content')
+        text = paragraphs.get_text()
+        title = paragraphs.span.getText()
+        text = text.split("\n")
+        first_paragrpah = text[12]
+        print(Style.BRIGHT + title)
+        print(Style.RESET_ALL + Fore.BLUE + (folder_name+doc))
+        print(Fore.RESET + Style.DIM + first_paragrpah[:250] + "...")
+        print(Style.RESET_ALL)
+
+
 #File openings
 with open("vocab.txt","r") as f:
     vocab = json.load(f)
@@ -55,9 +72,7 @@ while True:
 
     query_tokens = word_tokenize(query_input)
     processed = nlp(query_input)
-    for i in processed.ents:
-        print(i.text)
-        print(i.label_)
+
     
     
 
@@ -112,7 +127,10 @@ while True:
 
     for index,i in enumerate(sorted_web_searches):
         if (sorted_scores[index] > 0):
-            print(i)
+            returnText(i,query_tokens)
+            
+
+
     t2 = time()
     print(str(t2-t1) + " s")
 

@@ -9,10 +9,11 @@ import regex as re
 from time import time as t
 from math import log
 import numpy as np
+from time import sleep
 stops = set(stopwords.words('english'))
 t0 = t()
 weights = {
-    'title' : 5,
+    'title' : 20,
     'body' : 1,
     'h1' : 3,
     'h2' : 1.5,
@@ -23,14 +24,9 @@ weights = {
 
 def simpleTokenizor(text):
     soup = BeautifulSoup(text, 'html.parser')
-    title = soup.title()
-    paragraphs = soup.find_all('body')
-    h1Tags = soup.find_all("h1")
-    h2Tags = soup.find_all("h2")
-    h3Tags = soup.find_all("h3")
-    
-    zones = [title,paragraphs,h1Tags,h2Tags,h3Tags]
-
+    content = soup.find(id="content")
+    title = content.span
+    zones = [title,content]
     frequencytuple = []
     for index,zone in enumerate(zones):
         cleanedTokens = []
@@ -38,12 +34,10 @@ def simpleTokenizor(text):
         weightsArray = list(weights.values())
         for p in zone:
             cleanedParagraphs = p.get_text()
-
-            reS1 = re.sub("[^\w\s]", "", str(cleanedParagraphs))
-            tokens = word_tokenize(reS1)
+            cleaned_string = re.sub(r'[^\w\s-]', '', str(cleanedParagraphs))
+            cleaned_string = re.sub(r'-', ' ', cleaned_string)
+            tokens = word_tokenize(cleaned_string)
             cleanedTokens += [t.lower() for t in tokens if t not in stops]
-            if index == 2:
-                print(cleanedTokens)
 
             for token in cleanedTokens:
                 done = False
@@ -61,6 +55,7 @@ def simpleTokenizor(text):
                     counter += 1
                 if not done:
                     frequencytuple.append((token,1,weightsArray[index]))
+            
     return frequencytuple
 
 
@@ -78,7 +73,7 @@ file_names = [f for f in os.listdir("videogames") if os.path.isfile(os.path.join
 content = []
 tokens = []
 
-counter = 0
+counter = 0  
 for file_name in file_names:
     print("Reading file "+ str(counter))
     docIDs[counter] = file_name
