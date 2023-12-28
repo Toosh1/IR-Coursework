@@ -123,16 +123,20 @@ while True:
     scores_array = np.array(results)
     sorted_scores = np.sort(results)[::-1]
     sorted_scores_arg = np.argsort(results)[::-1]
-    sorted_web_searches = doc_ids_array[sorted_scores_arg[:10]] 
+    sorted_web_searches = doc_ids_array[sorted_scores_arg] 
 
+    results = 0
     for index,i in enumerate(sorted_web_searches):
+        if (sorted_scores[index] > 0):
+            results += 1
+    t2 = time()
+    print(str(results) +  " results in " + str(t2-t1) + " s")
+
+
+    for index,i in enumerate(sorted_web_searches[:10]):
         if (sorted_scores[index] > 0):
             returnText(i,query_tokens)
             
-
-
-    t2 = time()
-    print(str(t2-t1) + " s")
 
 
 
