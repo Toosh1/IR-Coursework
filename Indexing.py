@@ -1,10 +1,13 @@
 #---------------Imports----------------#
 
 from bs4 import BeautifulSoup
+
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from nltk import PorterStemmer
+from nltk.probability import FreqDist
+from nltk import PorterStemmer , bigrams
+
 import os
 import json
 import regex as re
@@ -18,7 +21,7 @@ import numpy as np
 t0 = t()
 stops = set(stopwords.words('english'))
 weights = {
-    'title' : 20,
+    'title' : 5,
     'body' : 1,
     'h1' : 3,
     'h2' : 1.5,
@@ -59,6 +62,18 @@ def tokenizeFiles(content):
         tokens.append([(stemmer.stem(word[0].lower()), word[1], word[2]) for word in page_tokens])
     return tokens
 
+def create_bigrams(tokens):
+    bigrams_array = []
+    bi_grams = list(bigrams(tokens))
+    bi_gram_freq = FreqDist(bi_grams)
+    bi_gram_dict = dict(bi_gram_freq)
+    for key in bi_gram_dict:
+        if bi_gram_dict[key] > 1:
+            bigram_string = key[0] + " " + key[1]
+            bigrams_array.append(bigram_string)
+    return tokens + bigrams_array
+
+
 def complicatedTokenizor(text):
     soup = BeautifulSoup(text, 'html.parser')
     content = soup.find(id="content")
@@ -67,7 +82,6 @@ def complicatedTokenizor(text):
     frequencytuple = []
     for index,zone in enumerate(zones):
         cleanedTokens = []
-        
         weightsArray = list(weights.values())
         for p in zone:
             cleanedParagraphs = p.get_text()
@@ -76,24 +90,31 @@ def complicatedTokenizor(text):
             tokens = word_tokenize(cleaned_string)
             cleanedTokens += [t.lower() for t in tokens if t not in stops]
 
-            for token in cleanedTokens:
-                done = False
-                counter = 0
-                for frequencyToken,_1,_2 in frequencytuple:
-                    if token == frequencyToken:
+        cleanedTokens = create_bigrams(cleanedTokens)
+        for token in cleanedTokens:
+            done = False
+            counter = 0
+            #bigrams will have a weight of 4 to promote searching for them
+            if " " in token:
+                isBigram = 4
+            else:
+                isBigram = 1
+            for frequencyToken,_1,_2 in frequencytuple:
+                if token == frequencyToken:
 
-                        tempUpdate = list(frequencytuple[counter])
-                        tempUpdate[1] += 1
-                        tempUpdate[2] += weightsArray[index]
-                        tempUpdate = tuple(tempUpdate)
-                        frequencytuple[counter] = tempUpdate
-                        done = True
-                        break
-                    counter += 1
-                if not done:
-                    frequencytuple.append((token,1,weightsArray[index]))
+                    tempUpdate = list(frequencytuple[counter])
+                    tempUpdate[1] += 1
+                    tempUpdate[2] += weightsArray[index] * isBigram
+                    tempUpdate = tuple(tempUpdate)
+                    frequencytuple[counter] = tempUpdate
+                    done = True
+                    break
+                counter += 1
+            if not done:
+                frequencytuple.append((token,1,weightsArray[index] * isBigram))
             
     return frequencytuple
+
 
 def inverseIndex(tokens):
     counter = 0

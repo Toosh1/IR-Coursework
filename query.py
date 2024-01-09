@@ -6,6 +6,17 @@ import numpy as np
 from nltk import PorterStemmer
 stemmer = PorterStemmer()
 stops = set(stopwords.words('english'))
+from time import time
+from bs4 import BeautifulSoup
+def return_test_text(doc,tokens):
+    folder_name = "videogames\\"
+    with open(folder_name + doc, 'r') as file_handle:
+        text = file_handle.read()
+        soup = BeautifulSoup(text, 'html.parser')
+        paragraphs = soup.find(id = 'content')
+        title = paragraphs.span.getText()
+        print(title)
+        #print("C:/Users/Mateusz/Documents/GitHub/IR-Coursework/videogames/" +doc)
 
 
 with open("vocab.txt","r") as f:
@@ -17,9 +28,22 @@ with open("postings.txt","r") as f:
 with open("termCounter.txt","r") as f:
     numberOfTerms = json.load(f)
 
-while True:
-    query_input = input("Search ('N' to cancel)::: ")
-
+games = [
+    "Action Adventure Games",
+    "RPG Games for PlayStation",
+    "The Guy Game",
+    "Spider Man",
+    "star wars battlefront",
+    "Iron Man",
+    "James Earl Cash",
+    "Crazy Taxi",
+    "James Bond",
+    "The Lord of the Rings The Two Towers PS2",
+    "n"
+    ] 
+for i in games:
+    query_input = i
+    t1 = time()
     # Check if cancel
     if query_input.lower() == "n":
         break
@@ -65,11 +89,17 @@ while True:
     scores_array = np.array(scores_array)
     sorted_scores = np.sort(scores_array)[::-1]
     sorted_scores_arg = np.argsort(scores_array)[::-1]
-    sorted_web_searches = doc_ids_array[sorted_scores_arg[:5]]
-
+    sorted_web_searches = doc_ids_array[sorted_scores_arg[:10]]
+    t2 = time()
+    print("-------------------------")
+    print(i)
+    #print(t2-t1,"s")
+    document_count = 0
     for index,i in enumerate(sorted_web_searches):
         if (sorted_scores[index] > 0):
-            print(i)
+            return_test_text(i,1)
+            document_count += 1
+    #print(document_count)
 
 
 

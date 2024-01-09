@@ -14,7 +14,7 @@ from spacy import displacy
 from colorama import Fore, Back, Style
 from bs4 import BeautifulSoup
 import textdistance
-
+import regex as re
 #Initialising
 nlp = spacy.load("en_core_web_sm")
 stemmer = PorterStemmer()
@@ -36,7 +36,16 @@ def sim(doc1, doc2):
     similarity = numerator / denominator
     return similarity
 
-def returnText(doc,tokens):
+def create_bigrams(tokens):
+    bigrams = []
+    length = len(tokens) - 1 
+    for index,token in enumerate(tokens):
+        if index < length:
+            bigram = token + " " + tokens[index+1]
+            bigrams.append(bigram)
+    return tokens + bigrams
+
+def return_text(doc,tokens):
     folder_name = "videogames\\"
     with open(folder_name + doc, 'r') as file_handle:
         text = file_handle.read()
@@ -51,7 +60,17 @@ def returnText(doc,tokens):
         print(Fore.RESET + Style.DIM + first_paragrpah[:250] + "...")
         print(Style.RESET_ALL)
 
-def findClosestWord(word):
+def return_test_text(doc,tokens):
+    folder_name = "videogames\\"
+    with open(folder_name + doc, 'r') as file_handle:
+        text = file_handle.read()
+        soup = BeautifulSoup(text, 'html.parser')
+        paragraphs = soup.find(id = 'content')
+        title = paragraphs.span.getText()
+        print(title)
+        #print("C:/Users/Mateusz/Documents/GitHub/IR-Coursework/videogames/" +doc)
+
+def find_closest_word(word):
     max_distance = 0
     closest_word = ''
     for i in vocab.values():
@@ -92,7 +111,28 @@ def print_results(results,query_tokens):
 
     for index,i in enumerate(sorted_web_searches[:10]):
         if (sorted_scores[index] > 0):
-            returnText(i,query_tokens)
+            return_text(i,query_tokens)
+
+def print_test_results(results,query_tokens):
+    global t1
+    #Arg sort document names with scores to get top ten names
+    doc_ids_array = np.array(list(docIDs.values()))
+    scores_array = np.array(results)
+    sorted_scores = np.sort(results)[::-1]
+    sorted_scores_arg = np.argsort(results)[::-1]
+    sorted_web_searches = doc_ids_array[sorted_scores_arg] 
+
+    results = 0
+    for index,i in enumerate(sorted_web_searches):
+        if (sorted_scores[index] > 0):
+            results += 1
+    t2 = time()
+    print(str(results) +  " results in " + str(round((t2-t1),6)) + " s")
+
+
+    for index,i in enumerate(sorted_web_searches[:10]):
+        if (sorted_scores[index] > 0):
+            return_test_text(i,query_tokens)
 
 def rank_function(query_tokens):
     first = True
@@ -101,6 +141,7 @@ def rank_function(query_tokens):
     #get number of vocabs
     postings_length = len(postings)
     query_vector = np.zeros((postings_length,1))
+    #print(query_tokens)
     for query_pair in query_tokens:
         query_term, weight = query_pair
         # get vocab id from dict
@@ -109,13 +150,18 @@ def rank_function(query_tokens):
             if query_term.lower() == value:
                 vocab_id = key
                 break
-
+        
         # exit if not found
         if vocab_id == "":
-            #if vocab not found print you cant find it find closest one and append new vocab to query
-            closest_vocab = findClosestWord(query_term)
-            print(f"Did you mean '{closest_vocab}'?")
-            query_tokens.append(stemmer.stem(closest_vocab))
+            if " " not in query_term and weight == 1:
+                #if vocab not found print you cant find it find closest one and append new vocab to query
+                closest_vocab = find_closest_word(query_term)
+                #print(closest_vocab)
+                if weight == 1: # not 1 means its a thesaurus term and therefore a user message would be confusing
+                    #print(f"Did you mean '{closest_vocab}'?")
+                    pass
+                query_tokens.append((stemmer.stem(closest_vocab),1))
+            
             continue  # Skip to the next term
         
         # get postings value (array with term frequency for each document)
@@ -126,13 +172,16 @@ def rank_function(query_tokens):
         dft = len(postings_value)
         tfidf = (1 + log(N/dft)) * (1/len(query_tokens))
         query_vector[int(vocab_id)] = tfidf * weight #weight is for thesauras (expanded query should be worth less)
+        
 
     num_columns = vector_matrix.shape[1]
     results = []
+    
     # Loop through columns
     for col_index in range(num_columns):
         column = vector_matrix[:, col_index]
         results.append(sim(column,query_vector)[0])
+    
     return results
 
 def pos_tagging(query):
@@ -158,7 +207,7 @@ def rank_synonyms(original_word, synonyms):
         if similarity is not None:
             if similarity != 1 and similarity >= 0.5:
                 #if = 1 then same word and below 0.5 word is too dissimilair 
-                ranked_synonyms.append((synonym,similarity/5)) # divide by 5 as to reduce weight to actual query term (1)
+                ranked_synonyms.append((clean_text(synonym),similarity/5)) # divide by 5 as to reduce weight to actual query term (1)
     ranked_synonyms = sorted(ranked_synonyms, key=lambda x: x[1], reverse=True)
     return ranked_synonyms
 
@@ -182,29 +231,65 @@ def add_standard_weights(query_tokens):
     #have a weight of 1 as they are what the user requested
     return [(x,1) for x in query_tokens]
 
+def clean_text(text):
+    cleaned_string = re.sub(r'[^\w\s-]', '', text)
+    cleaned_string = re.sub(r'-', ' ', cleaned_string)
+    return cleaned_string
 
 def main_loop():
-    global t1
+    global t1,step
+    step = 1
     while True:
         query_input = input("Search ('N' to cancel)::: ")
         t1 = time()
+        
         # Check if cancel
         if query_input.lower() == "n":
             break
-
+        query_input = clean_text(query_input)
         query_tokens = word_tokenize(query_input)
+        query_tokens = create_bigrams(query_tokens)
         query_tokens = add_standard_weights(query_tokens)
         synonym_tokens = produce_weighted_synonym_list(query_input)
         for i in synonym_tokens:
             query_tokens.append(i)
         results = rank_function(query_tokens)
         print_results(results,query_tokens)
-  
-                
-#Main Loop
-openFiles()
-main_loop()
 
+def test_loop():
+    global t1
+    games = [
+    "Action Adventure Games",
+    "RPG Games for PlayStation",
+    "The Guy Game",
+    "Spyder Man",
+    "star wars battlefront",
+    "Iron Man",
+    "James Earl Cash",
+    "Crazy Taxi",
+    "James Bond",
+    "The Lord of the Rings The Two Towers PS2",
+    ] 
+    time_total = 0
+    for i in games:
+        print("____________________________________________________________________________")
+        print(i)
+        t1 = time()
+        query_input = clean_text(i)
+        query_tokens = word_tokenize(query_input)
+        query_tokens = create_bigrams(query_tokens)
+        query_tokens = add_standard_weights(query_tokens)
+        
+        synonym_tokens = produce_weighted_synonym_list(query_input)
+        for i in synonym_tokens:
+            query_tokens.append(i)
+        results = rank_function(query_tokens)
+        print_test_results(results,query_tokens)
+#Main Loop
+if __name__ == '__main__':
+    openFiles()
+    #main_loop()
+    test_loop()
 
 
                 
