@@ -14,17 +14,18 @@ from spacy import displacy
 from colorama import Fore, Back, Style
 from bs4 import BeautifulSoup
 import textdistance
+from datetime import datetime
 import regex as re
 #Initialising
 nlp = spacy.load("en_core_web_sm")
 stemmer = PorterStemmer()
+lemmiter = WordNetLemmatizer()
 stops = set(stopwords.words('english'))
 vector_matrix = np.load("vector_matrix.npy")
 spell = SpellChecker()
 
 def eucLength(matrix):
-    return sqrt(sum([x**2 for x in matrix])) #This calculates our ueclidean distance by squaring all the tf, ...
-                                                  #... summing them, and then square rooting the sum.
+    return np.sqrt(np.sum(np.square(matrix)))
     
 def sim(doc1, doc2):    
     numerator = np.dot(doc1, doc2)  #np.dot() calculates the dot product between the vectors.
@@ -45,7 +46,7 @@ def create_bigrams(tokens):
             bigrams.append(bigram)
     return tokens + bigrams
 
-def return_text(doc,tokens):
+def return_text(doc,rank):
     folder_name = "videogames\\"
     with open(folder_name + doc, 'r') as file_handle:
         text = file_handle.read()
@@ -55,7 +56,7 @@ def return_text(doc,tokens):
         title = paragraphs.span.getText()
         text = text.split("\n")
         first_paragrpah = text[12]
-        print(Style.BRIGHT + title)
+        print(Style.BRIGHT + f"{rank+1}: " + title)
         print(Style.RESET_ALL + Fore.BLUE + (folder_name+doc))
         print(Fore.RESET + Style.DIM + first_paragrpah[:250] + "...")
         print(Style.RESET_ALL)
@@ -67,7 +68,7 @@ def return_test_text(doc,tokens):
         soup = BeautifulSoup(text, 'html.parser')
         paragraphs = soup.find(id = 'content')
         title = paragraphs.span.getText()
-        print(title)
+        #print(title)
         #print("C:/Users/Mateusz/Documents/GitHub/IR-Coursework/videogames/" +doc)
 
 def find_closest_word(word):
@@ -92,8 +93,31 @@ def openFiles():
     with open("termCounter.txt","r") as f:
         numberOfTerms = json.load(f)
 
-def print_results(results,query_tokens):
-    global t1
+def print_results(results,query):
+    global t1,save_buffer
+    #Arg sort document names with scores to get top ten names
+    doc_ids_array = np.array(list(docIDs.values()))
+    scores_array = np.array(results)
+    sorted_scores = np.sort(results)[::-1]
+    sorted_scores_arg = np.argsort(results)[::-1]
+    sorted_web_searches = doc_ids_array[sorted_scores_arg] 
+    results = 0
+    for index,i in enumerate(sorted_web_searches):
+        if (sorted_scores[index] > 0):
+            results += 1
+    t2 = time()
+    output_string = str(results) +  " results in " + str(round((t2-t1),6)) + " s"
+    print(output_string)
+    save_buffer += "------------------------------------------\n"
+    save_buffer += query + "\n"
+    save_buffer += output_string + "\n"
+    for index,i in enumerate(sorted_web_searches[:10]):
+        if (sorted_scores[index] > 0):
+            save_buffer += i + "\n"
+            return_text(i,index)
+
+def print_test_results(results,query):
+    global t1,save_buffer,stop_test,time_total
     #Arg sort document names with scores to get top ten names
     doc_ids_array = np.array(list(docIDs.values()))
     scores_array = np.array(results)
@@ -106,38 +130,25 @@ def print_results(results,query_tokens):
         if (sorted_scores[index] > 0):
             results += 1
     t2 = time()
-    print(str(results) +  " results in " + str(round((t2-t1),6)) + " s")
-
-
+    output_string = str(results) +  " results in " + str(round((t2-t1),6)) + " s"
+    save_buffer += "------------------------------------------\n"
+    save_buffer += query + "\n"
+    save_buffer += output_string + "\n"
+    if results == 399:
+        stop_test[0] += 1
+    stop_test[1] += 1
+    time_total += (t2-t1)
+    #print(f"{stop_test[0]}/{stop_test[1]}")
     for index,i in enumerate(sorted_web_searches[:10]):
         if (sorted_scores[index] > 0):
-            return_text(i,query_tokens)
-
-def print_test_results(results,query_tokens):
-    global t1
-    #Arg sort document names with scores to get top ten names
-    doc_ids_array = np.array(list(docIDs.values()))
-    scores_array = np.array(results)
-    sorted_scores = np.sort(results)[::-1]
-    sorted_scores_arg = np.argsort(results)[::-1]
-    sorted_web_searches = doc_ids_array[sorted_scores_arg] 
-
-    results = 0
-    for index,i in enumerate(sorted_web_searches):
-        if (sorted_scores[index] > 0):
-            results += 1
-    t2 = time()
-    print(str(results) +  " results in " + str(round((t2-t1),6)) + " s")
-
-
-    for index,i in enumerate(sorted_web_searches[:10]):
-        if (sorted_scores[index] > 0):
-            return_test_text(i,query_tokens)
+            save_buffer += i + "\n"
+            return_test_text(i,query)
 
 def rank_function(query_tokens):
     first = True
     scores_array = np.array([])
     query_tokens = [(stemmer.stem(term),weight) for term,weight in query_tokens if term not in stops]
+    #query_tokens = [(lemmiter.lemmatize(term),weight) for term,weight in query_tokens if term not in stops]
     #get number of vocabs
     postings_length = len(postings)
     query_vector = np.zeros((postings_length,1))
@@ -153,14 +164,14 @@ def rank_function(query_tokens):
         
         # exit if not found
         if vocab_id == "":
-            if " " not in query_term and weight == 1:
+            if " " not in query_term:
                 #if vocab not found print you cant find it find closest one and append new vocab to query
                 closest_vocab = find_closest_word(query_term)
-                #print(closest_vocab)
                 if weight == 1: # not 1 means its a thesaurus term and therefore a user message would be confusing
-                    #print(f"Did you mean '{closest_vocab}'?")
                     pass
-                query_tokens.append((stemmer.stem(closest_vocab),1))
+                    #print(f"Did you mean '{closest_vocab}'?")
+                #query_tokens.append((lemmiter.lemmatize(closest_vocab),weight))
+                query_tokens.append((stemmer.stem(closest_vocab),weight))
             
             continue  # Skip to the next term
         
@@ -215,7 +226,7 @@ def produce_weighted_synonym_list(query):
     tokens = word_tokenize(query)
     pos_tags = pos_tag(tokens)
     pos_tags = [token for token in pos_tags if token[0] not in stops]
-    noun_tokens = [token[0] for token in pos_tags if token[1] == 'NN']
+    noun_tokens = [token[0] for token in pos_tags if token[1] == "NN"]
     #produce synonums for all nouns in a query
     all_synonyms = []
     for noun in noun_tokens:
@@ -237,14 +248,16 @@ def clean_text(text):
     return cleaned_string
 
 def main_loop():
-    global t1,step
+    global t1,step,save_buffer
     step = 1
+    save_buffer = ""
     while True:
         query_input = input("Search ('N' to cancel)::: ")
         t1 = time()
         
         # Check if cancel
         if query_input.lower() == "n":
+            save_results()
             break
         query_input = clean_text(query_input)
         query_tokens = word_tokenize(query_input)
@@ -254,10 +267,20 @@ def main_loop():
         for i in synonym_tokens:
             query_tokens.append(i)
         results = rank_function(query_tokens)
-        print_results(results,query_tokens)
+        print_results(results,query_input)
+
+def save_results():
+    global save_buffer
+    current_time = datetime.now()
+    formatted_time = current_time.strftime("%Y-%m-%d %H-%M-%S.txt")
+    with open("saves/" + str(formatted_time),"w") as file:
+        file.write(save_buffer)
+    
 
 def test_loop():
-    global t1
+    #anything in this function is random and just for a lot of tests for the presentation
+
+    global t1, save_buffer,stop_test,time_total
     games = [
     "Action Adventure Games",
     "RPG Games for PlayStation",
@@ -268,23 +291,26 @@ def test_loop():
     "James Earl Cash",
     "Crazy Taxi",
     "James Bond",
-    "The Lord of the Rings The Two Towers PS2",
+    "The Lord of the Rings The Two Towers PS2"
     ] 
-    time_total = 0
+    
+    stop_test = [0,0]
+    save_buffer = ""
     for i in games:
-        print("____________________________________________________________________________")
-        print(i)
-        t1 = time()
-        query_input = clean_text(i)
-        query_tokens = word_tokenize(query_input)
-        query_tokens = create_bigrams(query_tokens)
-        query_tokens = add_standard_weights(query_tokens)
-        
-        synonym_tokens = produce_weighted_synonym_list(query_input)
-        for i in synonym_tokens:
-            query_tokens.append(i)
-        results = rank_function(query_tokens)
-        print_test_results(results,query_tokens)
+        time_total = 0
+        for z in range(100):
+            t1 = time()
+            query_input = clean_text(i)
+            query_tokens = word_tokenize(query_input)
+            query_tokens = create_bigrams(query_tokens)
+            query_tokens = add_standard_weights(query_tokens)
+            synonym_tokens = produce_weighted_synonym_list(query_input)
+            for j in synonym_tokens:
+                query_tokens.append(j)
+            results = rank_function(query_tokens)
+            print_test_results(results,query_input)
+        print(time_total/100,"s")
+    #save_results()
 #Main Loop
 if __name__ == '__main__':
     openFiles()

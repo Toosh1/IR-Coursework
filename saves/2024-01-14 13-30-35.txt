@@ -1,0 +1,39 @@
+------------------------------------------
+Action Adventure Games
+399 results in 0.216834 s
+god-of-war.html
+project-j-sega.html
+onimusha-3-demon-siege.html
+one-piece-grand-adventure.html
+sea-monsters-national-geographic.html
+marc-eckos-getting-up-contents-under-pressure.html
+24.html
+eragon.html
+alias.html
+the-guy-game.html
+------------------------------------------
+Spyder Man
+69 results in 1.401515 s
+spider-man-3.html
+spider-man-trilogy.html
+iron-man-2008.html
+mega-man-x-collection.html
+mega-man-x8.html
+pac-man-world-rally.html
+shadow-man-2econd-coming.html
+untitled-marvel-comics-rpg.html
+mafia.html
+manhunt.html
+------------------------------------------
+Mega Man
+78 results in 0.380252 s
+mega-man-x-collection.html
+mega-man-x8.html
+buzz-the-mega-quiz.html
+iron-man-2008.html
+spider-man-3.html
+spider-man-trilogy.html
+pac-man-world-rally.html
+shadow-man-2econd-coming.html
+mafia.html
+manhunt.html

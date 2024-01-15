@@ -1,0 +1,692 @@
+------------------------------------------
+will
+0 results in 0.207275 s
+------------------------------------------
+d
+0 results in 0.060155 s
+------------------------------------------
+above
+0 results in 0.067317 s
+------------------------------------------
+of
+0 results in 0.0697 s
+------------------------------------------
+his
+0 results in 0.076186 s
+------------------------------------------
+should
+0 results in 0.052166 s
+------------------------------------------
+wasn
+0 results in 0.065579 s
+------------------------------------------
+while
+0 results in 0.093674 s
+------------------------------------------
+their
+0 results in 0.111606 s
+------------------------------------------
+hasn
+0 results in 0.084092 s
+------------------------------------------
+having
+0 results in 0.077647 s
+------------------------------------------
+aren
+0 results in 0.070768 s
+------------------------------------------
+from
+0 results in 0.073658 s
+------------------------------------------
+youre
+174 results in 1.218923 s
+ratchet-and-clank-up-your-arsenal.html
+scarface.html
+wwe-smackdown-shut-your-mouth.html
+nba-street.html
+sea-monsters-national-geographic.html
+buzz-the-hollywood-quiz.html
+ncaa-march-madness-07.html
+the-sims-2.html
+nhl-07.html
+alias.html
+------------------------------------------
+shouldve
+23 results in 0.188571 s
+beatmania.html
+tekken-4.html
+karaoke-revolution-party.html
+arcana-hearts.html
+metal-slug-4-5.html
+terminator-3-rise-of-the-machines.html
+atv-offroad-fury-3.html
+ncaa-football-2004.html
+ben-10-protector-of-earth.html
+ace-combat-5-the-unsung-war.html
+------------------------------------------
+shant
+1 results in 0.183731 s
+ea-sports-fight-night-2004.html
+------------------------------------------
+the
+0 results in 0.082418 s
+------------------------------------------
+why
+0 results in 0.069474 s
+------------------------------------------
+not
+0 results in 0.065195 s
+------------------------------------------
+before
+0 results in 0.067454 s
+------------------------------------------
+me
+0 results in 0.066305 s
+------------------------------------------
+or
+0 results in 0.064033 s
+------------------------------------------
+hadn
+0 results in 0.068019 s
+------------------------------------------
+into
+0 results in 0.065114 s
+------------------------------------------
+there
+0 results in 0.050776 s
+------------------------------------------
+herself
+0 results in 0.066783 s
+------------------------------------------
+didnt
+1 results in 0.069769 s
+god-of-war-2-divine-retribution.html
+------------------------------------------
+you
+0 results in 0.066404 s
+------------------------------------------
+here
+0 results in 0.067693 s
+------------------------------------------
+mustn
+0 results in 0.088302 s
+------------------------------------------
+weren
+0 results in 0.077869 s
+------------------------------------------
+yourselves
+0 results in 0.050372 s
+------------------------------------------
+arent
+6 results in 0.077277 s
+test-drive.html
+meiwaku-seijin-panic-maker.html
+phantom-brave.html
+wwe-smackdown-vs-raw-2007.html
+madden-nfl-2006.html
+phantasy-star-universe.html
+------------------------------------------
+its
+0 results in 0.075989 s
+------------------------------------------
+to
+0 results in 0.071667 s
+------------------------------------------
+didn
+0 results in 0.065382 s
+------------------------------------------
+out
+0 results in 0.066436 s
+------------------------------------------
+nor
+0 results in 0.063429 s
+------------------------------------------
+few
+0 results in 0.062743 s
+------------------------------------------
+after
+0 results in 0.067339 s
+------------------------------------------
+own
+0 results in 0.064608 s
+------------------------------------------
+y
+0 results in 0.065941 s
+------------------------------------------
+myself
+0 results in 0.064814 s
+------------------------------------------
+most
+0 results in 0.060905 s
+------------------------------------------
+be
+0 results in 0.06382 s
+------------------------------------------
+now
+0 results in 0.063569 s
+------------------------------------------
+between
+0 results in 0.061012 s
+------------------------------------------
+below
+0 results in 0.071645 s
+------------------------------------------
+mustnt
+37 results in 0.179902 s
+spyro-v-working-title.html
+manhunt.html
+demento.html
+the-warriors.html
+the-simpsons.html
+madagascar.html
+soul-cradle.html
+meiwaku-seijin-panic-maker.html
+yakuza-2.html
+second-sight.html
+------------------------------------------
+further
+0 results in 0.083378 s
+------------------------------------------
+about
+0 results in 0.089095 s
+------------------------------------------
+them
+0 results in 0.091403 s
+------------------------------------------
+ourselves
+0 results in 0.087507 s
+------------------------------------------
+needn
+0 results in 0.088701 s
+------------------------------------------
+those
+0 results in 0.085133 s
+------------------------------------------
+shouldnt
+1 results in 0.064998 s
+burnout-dominator.html
+------------------------------------------
+same
+0 results in 0.064589 s
+------------------------------------------
+did
+0 results in 0.062631 s
+------------------------------------------
+were
+0 results in 0.066385 s
+------------------------------------------
+had
+0 results in 0.065592 s
+------------------------------------------
+then
+0 results in 0.062755 s
+------------------------------------------
+whom
+0 results in 0.062038 s
+------------------------------------------
+once
+0 results in 0.062649 s
+------------------------------------------
+too
+0 results in 0.062367 s
+------------------------------------------
+youve
+10 results in 0.069018 s
+crazy-taxi.html
+godzilla-save-the-earth.html
+the-king-of-route-66.html
+gallop-racer-8.html
+gran-turismo-concept-2002-tokyo-geneva.html
+swat-global-strike-team.html
+wwe-smackdown-shut-your-mouth.html
+god-of-war.html
+naruto-uzumaki-ninden.html
+enter-the-matrix-reloaded.html
+------------------------------------------
+under
+0 results in 0.063372 s
+------------------------------------------
+youd
+9 results in 0.06423 s
+sole-predator.html
+obscure.html
+nba-street.html
+front-mission-4.html
+god-hand.html
+grand-theft-auto-iii.html
+nba-ballers.html
+spy-fiction.html
+dragon-warrior-viii.html
+------------------------------------------
+mightn
+0 results in 0.063306 s
+------------------------------------------
+am
+0 results in 0.067083 s
+------------------------------------------
+been
+0 results in 0.065357 s
+------------------------------------------
+don
+0 results in 0.059933 s
+------------------------------------------
+for
+0 results in 0.063322 s
+------------------------------------------
+wasnt
+2 results in 0.061522 s
+7-sins.html
+final-fight-streetwise.html
+------------------------------------------
+but
+0 results in 0.073263 s
+------------------------------------------
+ve
+0 results in 0.066786 s
+------------------------------------------
+no
+0 results in 0.063586 s
+------------------------------------------
+ours
+0 results in 0.062891 s
+------------------------------------------
+we
+0 results in 0.060238 s
+------------------------------------------
+him
+0 results in 0.061795 s
+------------------------------------------
+doesn
+0 results in 0.062526 s
+------------------------------------------
+than
+0 results in 0.062577 s
+------------------------------------------
+its
+0 results in 0.066968 s
+------------------------------------------
+won
+0 results in 0.063828 s
+------------------------------------------
+haven
+0 results in 0.064692 s
+------------------------------------------
+hers
+0 results in 0.062919 s
+------------------------------------------
+o
+0 results in 0.062134 s
+------------------------------------------
+hadnt
+16 results in 0.166203 s
+gauntlet-seven-sorrows.html
+obscure.html
+devil-may-cry-3.html
+kingdom-hearts.html
+alias.html
+odin-sphere.html
+tom-clancys-rainbow-six-3.html
+crash-bandicoot-the-wrath-of-cortex.html
+shadow-hearts-ii.html
+the-warriors.html
+------------------------------------------
+a
+0 results in 0.068948 s
+------------------------------------------
+what
+0 results in 0.066459 s
+------------------------------------------
+these
+0 results in 0.064082 s
+------------------------------------------
+being
+0 results in 0.064338 s
+------------------------------------------
+with
+0 results in 0.061456 s
+------------------------------------------
+over
+0 results in 0.064157 s
+------------------------------------------
+against
+0 results in 0.062317 s
+------------------------------------------
+until
+0 results in 0.078353 s
+------------------------------------------
+just
+0 results in 0.071898 s
+------------------------------------------
+do
+0 results in 0.07966 s
+------------------------------------------
+on
+0 results in 0.066116 s
+------------------------------------------
+ll
+0 results in 0.06397 s
+------------------------------------------
+both
+0 results in 0.07868 s
+------------------------------------------
+thatll
+3 results in 0.070139 s
+samurai-warriors.html
+buzz-the-hollywood-quiz.html
+spy-fiction.html
+------------------------------------------
+when
+0 results in 0.082752 s
+------------------------------------------
+all
+0 results in 0.080948 s
+------------------------------------------
+and
+0 results in 0.080549 s
+------------------------------------------
+down
+0 results in 0.082553 s
+------------------------------------------
+couldnt
+1 results in 0.085578 s
+gran-turismo-4-prologue.html
+------------------------------------------
+he
+0 results in 0.098225 s
+------------------------------------------
+yours
+0 results in 0.100436 s
+------------------------------------------
+her
+0 results in 0.099117 s
+------------------------------------------
+they
+0 results in 0.09941 s
+------------------------------------------
+isn
+0 results in 0.097178 s
+------------------------------------------
+how
+0 results in 0.095419 s
+------------------------------------------
+who
+0 results in 0.09689 s
+------------------------------------------
+mightnt
+21 results in 0.32604 s
+grimgrimoire.html
+obscure-ii.html
+shaman-king-master-spirits.html
+alien-hominid.html
+dynasty-warriors-5.html
+evil-dead-regeneration.html
+genso-suikoden-v.html
+james-bond-007-goldeneye-2.html
+guilty-gear-x.html
+world-tour-soccer-2005.html
+------------------------------------------
+if
+0 results in 0.090567 s
+------------------------------------------
+other
+0 results in 0.09045 s
+------------------------------------------
+she
+0 results in 0.089566 s
+------------------------------------------
+does
+0 results in 0.09304 s
+------------------------------------------
+m
+0 results in 0.091483 s
+------------------------------------------
+ma
+0 results in 0.091501 s
+------------------------------------------
+through
+0 results in 0.092334 s
+------------------------------------------
+very
+0 results in 0.092745 s
+------------------------------------------
+as
+0 results in 0.090471 s
+------------------------------------------
+can
+0 results in 0.091719 s
+------------------------------------------
+has
+0 results in 0.089604 s
+------------------------------------------
+again
+0 results in 0.089658 s
+------------------------------------------
+havent
+1 results in 0.255039 s
+haven-call-of-the-king.html
+------------------------------------------
+in
+0 results in 0.086328 s
+------------------------------------------
+this
+0 results in 0.079347 s
+------------------------------------------
+by
+0 results in 0.082129 s
+------------------------------------------
+yourself
+0 results in 0.083276 s
+------------------------------------------
+some
+0 results in 0.089068 s
+------------------------------------------
+wont
+7 results in 0.226664 s
+gundam-true-odyssey.html
+resident-evil-outbreak-2.html
+tourist-trophy-the-real-riding-simulator.html
+gran-turismo-concept-2002-tokyo-geneva.html
+manhunt-2.html
+star-wars-episode-iii.html
+swat-global-strike-team.html
+------------------------------------------
+i
+0 results in 0.088197 s
+------------------------------------------
+during
+0 results in 0.082795 s
+------------------------------------------
+which
+0 results in 0.083584 s
+------------------------------------------
+off
+0 results in 0.084594 s
+------------------------------------------
+because
+0 results in 0.082105 s
+------------------------------------------
+my
+0 results in 0.082499 s
+------------------------------------------
+are
+0 results in 0.083065 s
+------------------------------------------
+such
+0 results in 0.083772 s
+------------------------------------------
+your
+0 results in 0.083249 s
+------------------------------------------
+youll
+32 results in 0.081012 s
+bully.html
+guitar-hero.html
+seiken-densetsu-project.html
+siren-ii-working-title.html
+sea-monsters-national-geographic.html
+test-drive.html
+sonic-riders.html
+nba-street.html
+manhunt.html
+hackinfection-part-1.html
+------------------------------------------
+hasnt
+1 results in 0.085804 s
+buzz-the-hollywood-quiz.html
+------------------------------------------
+each
+0 results in 0.110316 s
+------------------------------------------
+ain
+0 results in 0.096885 s
+------------------------------------------
+couldn
+0 results in 0.092752 s
+------------------------------------------
+only
+0 results in 0.091496 s
+------------------------------------------
+wouldnt
+1 results in 0.088613 s
+micro-machines-v4.html
+------------------------------------------
+our
+0 results in 0.096255 s
+------------------------------------------
+neednt
+37 results in 0.256366 s
+need-for-speed-most-wanted.html
+need-for-speed-underground.html
+need-for-speed-underground-2.html
+need-for-speed-carbon.html
+grand-theft-auto-iii.html
+xiii.html
+endgame.html
+sly-3.html
+f1-2002.html
+hackinfection-part-1.html
+------------------------------------------
+shan
+0 results in 0.08154 s
+------------------------------------------
+t
+0 results in 0.080582 s
+------------------------------------------
+shouldn
+0 results in 0.080469 s
+------------------------------------------
+shes
+10 results in 0.080245 s
+endgame.html
+shadow-hearts-3.html
+demento.html
+grimgrimoire.html
+ar-tonelico.html
+phantom-brave.html
+xenosaga-iii.html
+prince-of-persia-the-sands-of-time.html
+metal-gear-solid-3-snake-eater.html
+grand-theft-auto-san-andreas.html
+------------------------------------------
+wouldn
+0 results in 0.093034 s
+------------------------------------------
+isnt
+9 results in 0.081739 s
+manhunt-2.html
+wwe-crush-hour.html
+second-sight.html
+jak-x.html
+gun.html
+hackgu-part-3.html
+phantom-brave.html
+wwe-smackdown-vs-raw-2007.html
+james-bond-007-goldeneye-2.html
+------------------------------------------
+dont
+21 results in 0.086065 s
+crazy-taxi.html
+karaoke-revolution-party.html
+sole-predator.html
+aqua-teen-hunger-force-zombie-ninja-pro-am.html
+juiced.html
+silent-hill-3.html
+samurai-warriors.html
+persona-3.html
+manhunt-2.html
+swat-global-strike-team.html
+------------------------------------------
+where
+0 results in 0.084053 s
+------------------------------------------
+have
+0 results in 0.075803 s
+------------------------------------------
+an
+0 results in 0.075284 s
+------------------------------------------
+doesnt
+16 results in 0.075804 s
+endgame.html
+tekken-4.html
+hot-wheels-velocity-x.html
+ratchet-and-clank.html
+gundam-true-odyssey.html
+eragon.html
+ratchet-clank-size-matters.html
+gran-turismo-concept-2002-tokyo-geneva.html
+ace-combat-zero-the-belkan-war.html
+ace-combat-5-the-unsung-war.html
+------------------------------------------
+was
+0 results in 0.084668 s
+------------------------------------------
+doing
+0 results in 0.076812 s
+------------------------------------------
+theirs
+0 results in 0.07797 s
+------------------------------------------
+is
+0 results in 0.078644 s
+------------------------------------------
+werent
+2 results in 0.077612 s
+gungrave-od.html
+nba-live-2005.html
+------------------------------------------
+himself
+0 results in 0.082002 s
+------------------------------------------
+itself
+0 results in 0.080602 s
+------------------------------------------
+at
+0 results in 0.081371 s
+------------------------------------------
+it
+0 results in 0.082938 s
+------------------------------------------
+that
+0 results in 0.085794 s
+------------------------------------------
+so
+0 results in 0.082906 s
+------------------------------------------
+up
+0 results in 0.085853 s
+------------------------------------------
+re
+0 results in 0.082762 s
+------------------------------------------
+any
+0 results in 0.083537 s
+------------------------------------------
+more
+0 results in 0.092995 s
+------------------------------------------
+themselves
+0 results in 0.087329 s
+------------------------------------------
+s
+0 results in 0.086278 s

@@ -28,7 +28,7 @@ weights = {
     'h3' : 1.25,
 }
 stemmer = PorterStemmer()
-lemmatizer = WordNetLemmatizer()
+lemmiter = WordNetLemmatizer()
 
 #3 dictionaries to then save
 vocab = {}
@@ -60,6 +60,7 @@ def tokenizeFiles(content):
         print("Tokenzing file " + str(num))
         page_tokens = complicatedTokenizor(i)
         tokens.append([(stemmer.stem(word[0].lower()), word[1], word[2]) for word in page_tokens])
+        #tokens.append([(lemmiter.lemmatize(word[0].lower()), word[1], word[2]) for word in page_tokens])
     return tokens
 
 def create_bigrams(tokens):
@@ -89,7 +90,7 @@ def complicatedTokenizor(text):
             cleaned_string = re.sub(r'-', ' ', cleaned_string)
             tokens = word_tokenize(cleaned_string)
             cleanedTokens += [t.lower() for t in tokens if t not in stops]
-
+        
         cleanedTokens = create_bigrams(cleanedTokens)
         for token in cleanedTokens:
             done = False
